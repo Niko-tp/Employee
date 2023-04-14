@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+	<head>
+		<meta charset="UTF-8" th:remove="tag">
+	</head>
+	<body>
+		<div id="main" layout:fragment="content">
+			<form th:action="@{/Employee/employee/edit(id=*{id})}" th:object="${employee}" method="post">
+				<h2>編集</h2>
+				<ul class="error_list" th:if="${#fields.hasErrors()}">
+					<li th:each="err : ${#fields.errors('*')}">
+						<span th:text="${err}"></span>
+					</li>
+				</ul>
+				<table>
+					<tr>
+						<th>名前</th>
+						<td><input class="form-control" type="text" id="name" th:field="*{name}"></td>
+					</tr>
+					<tr>
+						<th>年齢</th>
+						<td><input class="form-control" type="text" id="age" th:field="*{age}"></td>
+					</tr>
+					<tr>
+						<th>住所</th>
+						<td><input class="form-control" type="text" id="address" th:field="*{address}"></td>
+					</tr>
+					<tr>
+						<th>部署</th>
+						<td>
+							<select th:field="*{department}">
+								<th:block th:each="department : ${@departmentRepository.findAll()}">
+									<option th:value="${department.dept_id}" th:text="${department.dept_name}"></option>
+								</th:block>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" value="登録">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>

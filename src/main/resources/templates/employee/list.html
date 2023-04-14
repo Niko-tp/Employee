@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+	<head>
+		<meta charset="UTF-8" th:remove="tag">
+	</head>
+	<body>
+		<div id="main" layout:fragment="content">
+			<h2>社員一覧</h2>
+			<div id="message" th:if="${flash}" th:text="${flash.getMessage()}"></div>
+			<div>
+				<a th:href="@{/Employee/employee/new}">新規追加</a>
+			</div>
+			<table>
+				<tr>
+					<th>社員ID</th>
+					<th>名前</th>
+					<th>年齢</th>
+					<th>住所</th>
+					<th>部署</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="employee: ${employees}" th:object="${employee}">
+					<td th:text="*{id}"></td>
+					<td th:text="*{name}"></td>
+					<td th:text="*{age}"></td>
+					<td th:text="*{address}"></td>
+					<td th:text="*{department.dept_name}"></td>
+					<td class="actions text-nowrap">
+						<a th:href="@{/Employee/employee/edit(id=*{id})}">編集</a>
+					</td>
+					<td class="actions text-nowrap">
+						<a th:href="@{/Employee/employee/delete(id=*{id})}">削除</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

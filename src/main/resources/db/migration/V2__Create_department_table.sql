@@ -1,0 +1,4 @@
+CREATE TABLE department (
+  dept_id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '部署ID',
+  dept_name varchar(255) NOT NULL DEFAULT '' COMMENT '部署名'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='部署';
